@@ -1,11 +1,11 @@
 import axios from "axios";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
-import { useSnackbar } from "notistack";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
 import Layout from "../../components/layout";
-import { api, BASE } from "../../utils/constants";
+import { api } from "../../utils/constants";
 import { getError } from "../../utils/error";
 
 export default function Donation() {

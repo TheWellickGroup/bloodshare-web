@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/layout";
 import axios from "axios";
-import { api } from "../../utils/constants";
+import Image from "next/legacy/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
+import Layout from "../../components/layout";
 import Wizard from "../../components/wizard";
+import { api } from "../../utils/constants";
 import { getError } from "../../utils/error";
-import Link from "next/link";
-import Image from "next/image";
 
 export default function Register() {
   const router = useRouter();

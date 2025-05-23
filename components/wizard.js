@@ -5,7 +5,7 @@ import React from "react";
 export default function Wizard({ activeStep = 0 }) {
   return (
     <Stepper
-      className={{ fontFamily: "Ruda" }}
+      className={{ fontFamily: "Lusitana" }}
       activeStep={activeStep}
       alternativeLabel
     >

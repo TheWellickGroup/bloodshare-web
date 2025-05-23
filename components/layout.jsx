@@ -11,7 +11,7 @@ export default function Layout({ children }) {
         <style jsx global>
           {`
             body {
-              font-family: 'Ruda', sans-serif !important;
+              font-family: 'Lusitana', serif !important;
             }
             main {
               min-height: 60vh;

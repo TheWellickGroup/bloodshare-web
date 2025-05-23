@@ -5,7 +5,7 @@ import { getError } from "../utils/error";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { api } from "../utils/constants";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 
 export default function DriveForm() {

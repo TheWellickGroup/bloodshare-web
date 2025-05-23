@@ -5,7 +5,7 @@ import { api } from "../../utils/constants";
 import { useSnackbar } from "notistack";
 import { getError } from "../../utils/error";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function Edit() {
   const router = useRouter();

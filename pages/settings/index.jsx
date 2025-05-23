@@ -1,11 +1,11 @@
+import { Link } from "@mui/material";
 import axios from "axios";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import Image from "next/legacy/image";
 import { useSnackbar } from "notistack";
-import { getError } from "../../utils/error";
+import { useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import { api } from "../../utils/constants";
-import { Link } from "@mui/material";
+import { getError } from "../../utils/error";
 
 export default function Settings() {
   const { enqueueSnackbar } = useSnackbar();

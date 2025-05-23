@@ -1,6 +1,5 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
-import React from "react";
 
 export default function Card({ props }) {
   return (
