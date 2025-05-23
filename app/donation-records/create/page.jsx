@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import DonationForm from "../../components/donationForm";
-import Layout from "../../components/layout";
+import DonationForm from "../../../components/donationForm";
+import Layout from "../../../components/layout";
 
 export default function AddRecord() {
   const [role, setRole] = useState("");

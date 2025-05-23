@@ -1,64 +1,57 @@
-import React, { useEffect } from "react";
-import Layout from "../../components/layout";
 import axios from "axios";
-import { api } from "../../utils/constants";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import React, { useEffect } from "react";
+import { api } from "../../../utils/constants";
+import Layout from "../../../components/layout";
 import { useSnackbar } from "notistack";
-import { getError } from "../../utils/error";
-import Wizard from "../../components/wizard";
+import { getError } from "../../../utils/error";
+import { useRouter } from "next/router";
 
-export default function Register() {
+export default function Login() {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = React.useState(false);
   const [password, setPassword] = React.useState("");
-  const [phone, setPhone] = React.useState("+2547");
-  const role = "FACILITYADMIN";
-  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [phone, setPhone] = React.useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      router.push("/dashboard");
+      return router.push("/dashboard");
     }
   });
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
+    const { redirect } = router.query;
     e.preventDefault();
     setLoading(true);
-    if (!role || !password || !phone) {
-      setLoading(false);
-      enqueueSnackbar("All fields are required", { variant: "error" });
-      return;
-    }
     try {
-      await axios
-        .post(`${api}/auth/signup`, { phone, password, role })
-        .then((res) => {
-          if (res.status == 201) {
-            localStorage.setItem("isVerified", false);
-            router.push({
-              pathname: "/verify",
-              query: { phone: phone },
-            });
+      await axios.post(`${api}/auth/login`, { phone, password }).then((res) => {
+        console.log(res);
+        if (res.status == 200) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("role", res.data.role);
+          if (res.data.role == "USER") {
+            router.push("/download");
+            return;
           }
-        });
+          router.push("/dashboard" || redirect);
+        }
+      });
     } catch (err) {
       console.log(err);
       enqueueSnackbar(getError(err), { variant: "error" });
       setLoading(false);
     }
   };
-
   return (
     <Layout>
       <div className="container">
-        <Wizard activeStep={1} />
-        <div className="row ">
+        <div className="row">
           <div className="col-md-4 offset-md-4 bg-white">
+            <h3 className="text-center">Welcome Back</h3>
             <div className="p-3">
-              <form onSubmit={handleRegister}>
+              <form onSubmit={handleLogin}>
                 <div className="form-group">
                   <label htmlFor="" className="form-label">
                     Phone Number
@@ -66,10 +59,10 @@ export default function Register() {
                   <input
                     type="tel"
                     value={phone}
-                    placeholder="+2547.."
+                    name="mail"
+                    placeholder="+2547597012.."
                     onChange={(e) => setPhone(e.target.value)}
                     className="form-control"
-                    required
                   />
                 </div>
                 <br />
@@ -80,23 +73,20 @@ export default function Register() {
                   <input
                     type="password"
                     value={password}
+                    name={"password"}
                     onChange={(e) => setPassword(e.target.value)}
                     className="form-control"
-                    required
                   />
                 </div>
-                <br />
-                <div className="form-group">
-                  <label htmlFor="" className="form-label">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="form-control"
-                    required
-                  />
+                <div className="text-end">
+                  <Link href="/users/forgot">
+                    <small
+                    className="fw-bold"
+                      style={{ color: "#fc7d7b", textDecoration: "underline" }}
+                    >
+                      Forgot Password
+                    </small>
+                  </Link>
                 </div>
                 <br />
                 <div className="text-center pb-4">
@@ -108,18 +98,17 @@ export default function Register() {
                     </>
                   ) : (
                     <button type="submit" className="btn btn-lg hero_main_btn ">
-                      Register
+                      Login
                     </button>
                   )}
                 </div>
               </form>
               <div className="text-center">
-                <p>
-                  Have an account?{" "}
-                  <p className="link">
-                    <Link href={"/login"}>Login</Link>
-                  </p>
-                </p>
+                <Link href={"/register"}>
+                  <button className="btn btn-md hero_sec_btn ">
+                    Create Facility Account
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/layout";
-import { api } from "../../utils/constants";
+import Layout from "../../../components/layout";
+import { api } from "../../../utils/constants";
 import { useSnackbar } from "notistack";
-import { getError } from "../../utils/error";
+import { getError } from "../../../utils/error";
 import { useRouter } from "next/router";
 import Image from "next/legacy/image";
 

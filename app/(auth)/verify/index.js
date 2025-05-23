@@ -1,12 +1,11 @@
-import React from "react";
-import Layout from "../../components/layout";
 import axios from "axios";
-import { api } from "../../utils/constants";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useSnackbar } from "notistack";
-import Wizard from "../../components/wizard";
-import { getError } from "../../utils/error";
+import React from "react";
+import Layout from "../../../components/layout";
+import Wizard from "../../../components/wizard";
+import { api } from "../../../utils/constants";
+import { getError } from "../../../utils/error";
 
 export default function Verify() {
   const router = useRouter();

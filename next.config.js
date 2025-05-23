@@ -3,11 +3,6 @@ require("dotenv").config();
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  env: {
-    API: process.env.API,
-    BASE: process.env.BASE
-  },
   images: {
     remotePatterns: [
       {
