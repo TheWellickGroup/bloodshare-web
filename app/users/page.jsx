@@ -42,7 +42,7 @@ export default function Users() {
             </button>
           </Link>
         </div>
-        <table class="table">
+        <Table>
           <thead>
             <tr>
               <th scope="col">#</th>
