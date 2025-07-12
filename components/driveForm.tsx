@@ -1,8 +1,8 @@
 import axios from "axios";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { api } from "../utils/constants";
 import { getError } from "../utils/error";
 import { Button } from "./ui/button";
@@ -10,7 +10,6 @@ import { Input } from "./ui/input";
 
 export default function DriveForm() {
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = React.useState(false);
   const [file, setFile] = useState("");
   const [feed, setFeed] = useState({
@@ -56,12 +55,12 @@ export default function DriveForm() {
           })
           .catch((err) => {
             setLoading(false);
-            enqueueSnackbar(getError(err), { variant: "error" });
+            toast.error(getError(err));
           });
       }
     } catch (err) {
       console.log(err);
-      enqueueSnackbar(getError(err), { variant: "error" });
+      toast.error(getError(err));
       setLoading(false);
     }
   };
@@ -76,7 +75,7 @@ export default function DriveForm() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-4 offset-md-4 bg-white">
+        <div className="flex">
           <h5 className="text-center">Announce a blood donation drive</h5>
           <div className="p-3">
             <form onSubmit={handleDrive}>

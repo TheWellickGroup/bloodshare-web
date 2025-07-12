@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -12,13 +13,12 @@ import axios from "axios";
 import { Bug, Pencil, Trash } from "lucide-react";
 import moment from "moment";
 import Link from "next/link";
-import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { api } from "../../utils/constants";
 import { getError } from "../../utils/error";
+import { toast } from "sonner";
 
 export default function Donations() {
-  const { enqueueSnackbar } = useSnackbar();
   const [donations, setDonations] = useState([]);
   const [records, setRecords] = useState([]);
 
@@ -36,7 +36,7 @@ export default function Donations() {
         setDonations(res.data);
       })
       .catch((err) => {
-        enqueueSnackbar(getError(err), { variant: "error" });
+        toast.error(getError(err));
         console.log(err);
       });
 
@@ -50,7 +50,7 @@ export default function Donations() {
         setRecords(res.data);
       })
       .catch((err) => {
-        enqueueSnackbar(getError(err), { variant: "error" });
+        toast.error(getError(err));
         console.log(err);
       });
   };
@@ -60,6 +60,8 @@ export default function Donations() {
     const rol = localStorage.getItem("role");
     setRole(rol);
   }, []);
+
+
   return (
     <div className="container">
       <div className="text-end">

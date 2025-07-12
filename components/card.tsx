@@ -5,10 +5,9 @@ import { Card, CardContent } from "./ui/card";
 
 export default function DashboardCard({ props }) {
   return (
-    <div className="container">
+    <div className="">
       <h2 className="text-center">Life Saving Activities</h2>
-      <div className="row ">
-        <div className="col-lg-3 col-md-4 col-sm-12">
+        <div className="flex flex-row items-center justify-center gap-2">
           <Card>
             <CardContent>
               <Image
@@ -29,8 +28,6 @@ export default function DashboardCard({ props }) {
               </div>
             </CardContent>
           </Card>
-        </div>
-        <div className="col-lg-3 col-md-4 col-sm-12">
           <Card>
             <CardContent>
               <Image
@@ -51,8 +48,6 @@ export default function DashboardCard({ props }) {
               </div>
             </CardContent>
           </Card>
-        </div>
-        <div className="col-lg-3 col-md-4 col-sm-12">
           <Card>
             <CardContent>
               <Image
@@ -74,10 +69,9 @@ export default function DashboardCard({ props }) {
               </div>
             </CardContent>
           </Card>
-        </div>
-        {props.role == "SUPERADMIN" ? (
+    
+        {props.role == "SUPERADMIN" && (
           <>
-            <div className="col-lg-3 col-md-4 col-sm-12">
               <Card>
                 <CardContent>
                   <Image
@@ -99,12 +93,9 @@ export default function DashboardCard({ props }) {
                   </div>
                 </CardContent>
               </Card>
-            </div>
           </>
-        ) : (
-          ""
         )}
-      </div>
+    </div>
     </div>
   );
 }

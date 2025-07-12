@@ -1,8 +1,10 @@
+"use client"
+
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import { useState } from "react";
+import { toast } from "sonner";
 import { api } from "../utils/constants";
 import { getError } from "../utils/error";
 import { Button } from "./ui/button";
@@ -10,7 +12,6 @@ import { Input } from "./ui/input";
 
 export default function DonationForm() {
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
   const [record, setRecord] = useState({
     name: "",
@@ -32,7 +33,6 @@ export default function DonationForm() {
     e.preventDefault();
     const token = localStorage.getItem("token");
     setLoading(true);
-    console.log(record);
     axios
       .post(`${api}/records`, record, {
         headers: {
@@ -47,7 +47,7 @@ export default function DonationForm() {
       })
       .catch((err) => {
         setLoading(false);
-        enqueueSnackbar(getError(err), { variant: "error" });
+        toast.error(getError(err));
         console.log(err);
       });
   };
@@ -193,7 +193,7 @@ export default function DonationForm() {
                     </div>
                   </>
                 ) : (
-                  <Button type="submit" className="btn btn-lg hero_main_btn ">
+                  <Button type="submit">
                     Create Record
                   </Button>
                 )}

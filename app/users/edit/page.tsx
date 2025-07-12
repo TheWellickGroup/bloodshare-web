@@ -1,11 +1,10 @@
 import axios from "axios";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import Layout from "../../../components/layout";
 import { api } from "../../../utils/constants";
 import { getError } from "../../../utils/error";
+import { Input } from "@/components/ui/input";
 
 export default function Edit() {
   const router = useRouter();
@@ -20,7 +19,6 @@ export default function Edit() {
     bloodType: "",
     avatar: "",
   });
-  const { enqueueSnackbar } = useSnackbar();
   const handleChange = (e) => {
     setProfile({
       ...profile,
@@ -64,12 +62,10 @@ export default function Edit() {
         }
       })
       .catch((err) => {
-        enqueueSnackbar(getError(err), { variant: "error" });
         setLoading(false);
       });
   };
   return (
-    <Layout>
       <div className="container">
         <div className="row">
           <div className="col-md-4 offset-md-4 bg-white">
@@ -93,7 +89,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Names
                   </label>
-                  <input
+                  <Input
                     type="text"
                     name="name"
                     value={profile.name}
@@ -106,7 +102,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Email
                   </label>
-                  <input
+                  <Input
                     type="email"
                     name="email"
                     value={profile.email}
@@ -119,7 +115,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Life Saver Points
                   </label>
-                  <input
+                  <Input
                     type="number"
                     disabled
                     name="bloodPoints"
@@ -133,7 +129,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Birthday
                   </label>
-                  <input
+                  <Input
                     type="text"
                     name="dateOfBirth"
                     value={profile.dateOfBirth}
@@ -146,7 +142,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Blood Group
                   </label>
-                  <input
+                  <Input
                     type="text"
                     name="bloodType"
                     disabled
@@ -160,7 +156,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Body Weight
                   </label>
-                  <input
+                  <Input
                     type="number"
                     name="bodyWeight"
                     value={profile.bodyWeight}
@@ -173,7 +169,7 @@ export default function Edit() {
                   <label htmlFor="" className="form-label">
                     Gender
                   </label>
-                  <input
+                  <Input
                     type="text"
                     name="gender"
                     disabled
@@ -202,6 +198,5 @@ export default function Edit() {
           </div>
         </div>
       </div>
-    </Layout>
   );
 }

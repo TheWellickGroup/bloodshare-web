@@ -120,7 +120,7 @@ export default function BroadCast() {
                 ))}
               </>
             ) : (
-              <tr scope="row">
+              <tr>
                 <div className="text-center">
                   <p>
                     <Bug /> no data to display

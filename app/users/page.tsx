@@ -1,13 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/layout";
 import { api } from "../../utils/constants";
-import { useSnackbar } from "notistack";
 import { getError } from "../../utils/error";
 import Link from "next/link";
+import { Table } from "@/components/ui/table";
 
 export default function Users() {
-  const { enqueueSnackbar } = useSnackbar();
   const [users, setUsers] = useState([]);
   const [role, setRole] = useState("");
   const loadUsers = () => {
@@ -23,7 +21,6 @@ export default function Users() {
         setUsers(res.data);
       })
       .catch((err) => {
-        enqueueSnackbar(getError(err), { variant: "error" });
       });
   };
 
@@ -33,7 +30,6 @@ export default function Users() {
     setRole(rol);
   }, []);
   return (
-    <Layout>
       <div className="container pt-5">
         <div className="text-end">
           <Link href={"/users/add"}>
@@ -77,8 +73,7 @@ export default function Users() {
               <th scope="col">Action</th>
             </tr>
           </tfoot>
-        </table>
+        </Table>
       </div>
-    </Layout>
   );
 }

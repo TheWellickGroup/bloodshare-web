@@ -4,15 +4,14 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import React from "react";
-import Wizard from "../../../components/wizard";
+import { toast } from "sonner";
 import { api } from "../../../utils/constants";
 import { getError } from "../../../utils/error";
+import { Input } from "@/components/ui/input";
 
 export default function Register() {
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = React.useState(false);
   const [password, setPassword] = React.useState("");
   const [phone, setPhone] = React.useState("+2547");
@@ -24,7 +23,7 @@ export default function Register() {
     setLoading(true);
     if (!role || !password || !phone) {
       setLoading(false);
-      enqueueSnackbar("All fields are required", { variant: "error" });
+      toast.error("All fields are required", { description: "error" });
       return;
     }
     try {
@@ -38,54 +37,50 @@ export default function Register() {
         });
     } catch (err) {
       console.log(err);
-      enqueueSnackbar(getError(err), { variant: "error" });
+      toast.error(getError(err), { description: "error" });
       setLoading(false);
     }
   };
 
   return (
-    <div className="container">
-      <Wizard activeStep={1} />
-      <div className="row ">
-        <div className="col-md-4 offset-md-4 bg-white">
+    <div className="flex items-center">
+      <div className="">
+        <div className=" bg-white">
           <div className="p-3">
             <form onSubmit={handleRegister}>
-              <div className="form-group">
+              <div>
                 <label htmlFor="" className="form-label">
                   Phone Number
                 </label>
-                <input
+                <Input
                   type="tel"
                   value={phone}
                   placeholder="+2547.."
                   onChange={(e) => setPhone(e.target.value)}
-                  className="form-control"
                   required
                 />
               </div>
               <br />
-              <div className="form-group">
+              <div>
                 <label htmlFor="" className="form-label">
                   Password
                 </label>
-                <input
+                <Input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="form-control"
                   required
                 />
               </div>
               <br />
-              <div className="form-group">
+              <div>
                 <label htmlFor="" className="form-label">
                   Confirm Password
                 </label>
-                <input
+                <Input
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="form-control"
                   required
                 />
               </div>
@@ -98,7 +93,7 @@ export default function Register() {
                     </div>
                   </>
                 ) : (
-                  <Button type="submit" className="btn btn-lg hero_main_btn ">
+                  <Button type="submit">
                     Register
                   </Button>
                 )}

@@ -1,19 +1,18 @@
+"use client"
 import axios from "axios";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import Layout from "../../components/layout";
 import { api } from "../../utils/constants";
 import { getError } from "../../utils/error";
 import { Bug } from "lucide-react";
+import { toast } from "sonner";
 
 export default function Donation() {
   const router = useRouter();
   const [drives, setDrives] = useState([]);
   const [role, setRole] = useState("");
-  const { enqueueSnackbar } = useSnackbar();
   const base = process.env.BASE;
   const getFeeds = async () => {
     const token = localStorage.getItem("token");
@@ -27,7 +26,7 @@ export default function Donation() {
         setDrives(res.data);
       })
       .catch((err) => {
-        enqueueSnackbar(getError(err), { variant: "error" });
+        toast.error(getError(err));
         console.log(err);
       });
   };
@@ -41,7 +40,6 @@ export default function Donation() {
     setRole(rol);
   }, []);
   return (
-    <Layout>
       <div className="container ">
         <div className="text-end">
           <Link href={"/donation/add"}>
@@ -110,6 +108,5 @@ export default function Donation() {
           </tfoot>
         </table>
       </div>
-    </Layout>
   );
 }

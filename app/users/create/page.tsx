@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 export default function AddUser() {
   const [role, setRole] = useState("");
+  const router = useRouter()
 
   useEffect(() => {
     const rol = localStorage.getItem("role");
@@ -37,7 +41,6 @@ export default function AddUser() {
         });
     } catch (err) {
       console.log(err);
-      enqueueSnackbar(getError(err), { variant: "error" });
       setLoading(false);
     }
   };
@@ -53,7 +56,7 @@ export default function AddUser() {
                   <label htmlFor="" className="form-label">
                     Facility Name.
                   </label>
-                  <input
+                  <Input
                     type="text"
                     value={name}
                     placeholder="Makini Health"
@@ -66,7 +69,7 @@ export default function AddUser() {
                 <label htmlFor="" className="form-label">
                   Phone Number
                 </label>
-                <input
+                <Input
                   type="tel"
                   name="phone"
                   placeholder="+2547.."
@@ -79,7 +82,7 @@ export default function AddUser() {
                 <label htmlFor="" className="form-label">
                   Password
                 </label>
-                <input
+                <Input
                   type="password"
                   name="password"
                   onChange={handleChange}
@@ -91,7 +94,7 @@ export default function AddUser() {
                 <label htmlFor="" className="form-label">
                   Confirm Password
                 </label>
-                <input
+                <Input
                   type="password"
                   name="confirmPassword"
                   onChange={handleChange}

@@ -3,19 +3,17 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
 import React from "react";
-import Wizard from "../../../components/wizard";
 import { api } from "../../../utils/constants";
 import { getError } from "../../../utils/error";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 
 export default function Verify() {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
-  const { enqueueSnackbar } = useSnackbar();
   const [code, setCode] = React.useState("");
-  const { phone } = router.query;
-  console.log(phone);
+  const phone = "ekjrkej"
 
   const handleVerify = async (e) => {
     e.preventDefault();
@@ -28,17 +26,15 @@ export default function Verify() {
         }
       });
     } catch (err) {
-      console.log(err);
-      enqueueSnackbar(getError(err), { variant: "error" });
+      toast.error(getError(err));
       setLoading(false);
     }
   };
 
   return (
     <div className="container pt-5">
-      <Wizard activeStep={2} />
-      <div className="row ">
-        <div className="col-md-4 offset-md-4 bg-white">
+      <div className="">
+        <div className="flex">
           <div className="p-3">
             <form onSubmit={handleVerify}>
               <br />
@@ -46,7 +42,7 @@ export default function Verify() {
                 <label htmlFor="" className="form-label">
                   Enter the unique code delivered to your phoneNumber.
                 </label>
-                <input
+                <Input
                   type="number"
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
